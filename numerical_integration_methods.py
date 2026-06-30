@@ -124,3 +124,11 @@ def scipy_quad_wrapper(f, a, b, N_GRID, *args):
     """
     val, _ = quad(f, a, b, args=args, limit=100)
     return val
+
+# The "Strategy" Dispatcher (OOP paradigm)
+INTEGRATION_DISPATCH = {
+    'trapezoidal': integral_solve_using_trapezoidal_rule,
+    'romberg': integral_solve_using_romberg_method,
+    'simpsons': integral_solve_using_simpsons_rule,
+    'scipy': scipy_quad_wrapper
+}
