@@ -18,6 +18,6 @@ PLOT_ERROR = True        # Flag to trigger the matplotlib convergence graph
 PLOT_WAVEFUNCTION = True # Flag to trigger visualizing the final wavefunctions
 
 # --- Numerical Methods ---
-integration_method = 'trapezoidal' # Options: 'analytical', 'scipy', 'trapezoidal', 'romberg', 'simpsons'
+integration_method = 'analytical' # Options: 'analytical', 'scipy', 'trapezoidal', 'romberg', 'simpsons'
 eigenvalue_method = 'scipy'        # Options: 'scipy', 'QR', 'Jacobi'
 N_GRID = 1000                      # Number of grid intervals for custom integration methods

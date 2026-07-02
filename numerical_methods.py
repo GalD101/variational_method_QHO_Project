@@ -1,4 +1,5 @@
 from scipy.integrate import quad
+from scipy.linalg import eigh
 
 def integral_solve_using_trapezoidal_rule(f, a, b, N, *args) -> float:
     """
@@ -125,10 +126,133 @@ def scipy_quad_wrapper(f, a, b, N_GRID, *args):
     val, _ = quad(f, a, b, args=args, limit=100)
     return val
 
+def custom_qr_algorithm(H, max_iter=2000, tol=1e-10):
+    """
+    Diagonalizes a symmetric matrix using the iterative QR algorithm.
+    
+    Parameters
+    ----------
+    H : np.ndarray
+        The symmetric Hamiltonian matrix.
+    max_iter : int
+        The maximum number of QR iterations.
+    tol : float
+        The tolerance for convergence (off-diagonal elements near zero).
+        
+    Returns
+    -------
+    energies : np.ndarray
+        1D array of eigenvalues.
+    eigenvectors : np.ndarray
+        2D array of eigenvectors (columns).
+    """
+    # Create a copy of H to avoid modifying the original matrix
+    H_k = np.copy(H)
+    n = H_k.shape[0]
+    
+    # Initialize the eigenvector matrix as the Identity matrix
+    V_k = np.eye(n)
+    
+    for i in range(max_iter):
+        # 1. QR Decomposition
+        Q, R = np.linalg.qr(H_k)
+        
+        # 2. Reverse Multiplication (Similarity Transformation)
+        H_k = R @ Q
+        
+        # 3. Accumulate the eigenvectors
+        V_k = V_k @ Q
+        
+        # 4. Convergence Check (Are the off-diagonal elements practically zero?)
+        # For a symmetric matrix, we can just check the lower triangle (excluding diagonal)
+        off_diagonal_sum = np.sum(np.abs(np.tril(H_k, k=-1)))
+        
+        if off_diagonal_sum < tol:
+            print(f"QR Algorithm converged in {i} iterations.")
+            break
+    else:
+        print(f"Warning: QR Algorithm did not fully converge within {max_iter} iterations.")
+
+    # The eigenvalues are the diagonal elements of the final H_k matrix
+    energies = np.diag(H_k)
+    
+    return energies, V_k
+
+def custom_jacobi_iteration(H, max_iter=5000, tol=1e-10):
+    """
+    Diagonalizes a symmetric matrix using the Jacobi Eigenvalue Algorithm.
+    
+    Parameters
+    ----------
+    H : np.ndarray
+        The symmetric Hamiltonian matrix.
+    max_iter : int
+        The maximum number of rotations.
+    tol : float
+        The tolerance for convergence (off-diagonal elements near zero).
+        
+    Returns
+    -------
+    energies : np.ndarray
+        1D array of eigenvalues.
+    eigenvectors : np.ndarray
+        2D array of eigenvectors (columns).
+    """
+    H_k = np.copy(H)
+    n = H_k.shape[0]
+    V_k = np.eye(n)
+    
+    for i in range(max_iter):
+        # 1. Find the largest off-diagonal element
+        # We temporarily set the diagonal to zero so np.argmax only searches off-diagonals
+        H_off_diagonal = H_k - np.diag(np.diag(H_k))
+        
+        # np.unravel_index converts the flattened 1D max index back into (row, col) coordinates
+        p, q = np.unravel_index(np.argmax(np.abs(H_off_diagonal)), H_k.shape)
+        
+        # 2. Convergence Check
+        if np.abs(H_k[p, q]) < tol:
+            print(f"Jacobi Algorithm converged in {i} iterations.")
+            break
+            
+        # 3. Calculate the rotation angle theta
+        if H_k[p, p] == H_k[q, q]:
+            # If diagonal elements are equal, tan(2*theta) approaches infinity
+            theta = np.pi / 4.0
+        else:
+            theta = 0.5 * np.arctan(2.0 * H_k[p, q] / (H_k[p, p] - H_k[q, q]))
+            
+        # 4. Construct the Orthogonal Rotation Matrix (P)
+        P = np.eye(n)
+        P[p, p] = np.cos(theta)
+        P[q, q] = np.cos(theta)
+        P[p, q] = np.sin(theta)
+        P[q, p] = -np.sin(theta)
+        
+        # 5. Apply the Similarity Transformation (H = P^T * H * P)
+        H_k = P.T @ H_k @ P
+        
+        # 6. Accumulate the Eigenvectors (V = V * P)
+        V_k = V_k @ P
+        
+    else:
+        print(f"Warning: Jacobi Algorithm did not fully converge within {max_iter} iterations.")
+
+    # The eigenvalues are the isolated elements on the main diagonal
+    energies = np.diag(H_k)
+    
+    return energies, V_k
+
 # The "Strategy" Dispatcher (OOP paradigm)
 INTEGRATION_DISPATCH = {
     'trapezoidal': integral_solve_using_trapezoidal_rule,
     'romberg': integral_solve_using_romberg_method,
     'simpsons': integral_solve_using_simpsons_rule,
     'scipy': scipy_quad_wrapper
+}
+
+EIGEN_PROBLEM_DISPATCH = {
+    'Jacobi': custom_jacobi_iteration,
+    'QR': custom_qr_algorithm,
+    'scipy': eigh
 }
