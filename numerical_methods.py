@@ -1,3 +1,4 @@
+import numpy as np
 from scipy.integrate import quad
 from scipy.linalg import eigh
 
@@ -34,7 +35,6 @@ def integral_solve_using_trapezoidal_rule(f, a, b, N, *args) -> float:
     s *= h
     
     return s
-
 
 def integral_solve_using_romberg_method(f, a, b, N, *args) -> float:
     """
@@ -242,6 +242,41 @@ def custom_jacobi_iteration(H, max_iter=5000, tol=1e-10):
     energies = np.diag(H_k)
     
     return energies, V_k
+
+def solve_hamiltonian(H, N_STATES, eigen_method):
+    """Diagonalizes the Hamiltonian and returns the lowest N_STATES.
+    
+    Parameters
+    ----------
+    H : np.ndarray
+        The Hamiltonian matrix to diagonalize.
+    N_STATES : int
+        The number of lowest energy states to return.
+    eigen_method : str
+        The method to use for eigenvalue decomposition ('scipy', 'QR', 'Jacobi').
+
+    Returns
+    -------
+    tuple
+        A tuple containing:
+        - sorted_energies: np.ndarray of the lowest N_STATES eigenvalues (energies).
+        - sorted_wavefunctions: np.ndarray of the corresponding eigenvectors (wavefunctions).
+    """
+    # Solve secular equation, which is just the eigenvalue problem for the Hamiltonian matrix H.
+    if eigen_method in EIGEN_PROBLEM_DISPATCH:
+        eigen_method_func = EIGEN_PROBLEM_DISPATCH[eigen_method]
+
+        energies, wavefunctions = eigen_method_func(H)
+    
+    else:
+        raise ValueError(f"Invalid eigenvalue method: {eigen_method}")
+        
+    # Sort eigenvalues from lowest to highest
+    sort_indices = np.argsort(energies)
+    sorted_energies = energies[sort_indices]
+    sorted_wavefunctions = wavefunctions[:, sort_indices]
+    
+    return sorted_energies[:N_STATES], sorted_wavefunctions[:, :N_STATES]
 
 # The "Strategy" Dispatcher (OOP paradigm)
 INTEGRATION_DISPATCH = {
