@@ -9,7 +9,7 @@ OMEGA = 1.0           # Oscillator frequency
 # We label them as defaults so we know they are meant to be overwritten in loops
 DEFAULT_L = 30.0#10.0      
 DEFAULT_N_BASIS = 50  
-DEFAULT_N_STATES = 5
+DEFAULT_N_STATES = 20
 
 # --- Execution Flags ---
 # These control the logic flow, making debugging much easier.
