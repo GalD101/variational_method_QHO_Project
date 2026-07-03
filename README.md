@@ -8,7 +8,7 @@ In this notebook, We will solve using numeric (and symbolic) calculations the Qu
 * [1. The Hamiltonian](#1-the-hamiltonian)
 * [2. The Basis Set (Infinite Square Well)](#2-the-basis-set-infinite-square-well)
 * [3. Proof of the Variational Theorem](#3-proof-of-the-variational-theorem)
-* [4. Derivation of the Linear Variational Method (The Secular Equation)](4-derivation-of-the-linear-variational-method-the-secular-equation)
+* [4. Derivation of the Linear Variational Method (The Secular Equation)](#4-derivation-of-the-linear-variational-method-the-secular-equation)
 * [5. Analytical Solution of the Infinite Square Well](#5-analytical-solution-of-the-infinite-square-well)
 * [6. Analytical Solutions of the Quantum Harmonic Oscillator](#6-analytical-solutions-of-the-quantum-harmonic-oscillator)
 * [7. Accelerating the Engine: Analytical Matrix Elements](#7-accelerating-the-engine-analytical-matrix-elements)
