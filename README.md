@@ -5,13 +5,13 @@ In this notebook, We will solve using numeric (and symbolic) calculations the Qu
 ---
 
 ## Table of Contents
-* [1. The Hamiltonian](#1.-The-Hamiltonian)
-* [2. The Basis Set (Infinite Square Well)](#2.-The-Basis-Set-(Infinite-Square-Well))
-* [3. Proof of the Variational Theorem](#3.-Proof-of-the-Variational-Theorem)
-* [4. Derivation of the Linear Variational Method (The Secular Equation)](#4.-Derivation-of-the-Linear-Variational-Method-(The-Secular-Equation))
-* [5. Analytical Solution of the Infinite Square Well](#5.-Analytical-Solution-of-the-Infinite-Square-Well)
-* [6. Analytical Solutions of the Quantum Harmonic Oscillator](#6.-Analytical-Solutions-of-the-Quantum-Harmonic-Oscillator)
-* [7. Accelerating the Engine: Analytical Matrix Elements](#7.-Accelerating-the-Engine:-Analytical-Matrix-Elements)
+* [1. The Hamiltonian](#1-the-hamiltonian)
+* [2. The Basis Set (Infinite Square Well)](#2-the-basis-set-infinite-square-well)
+* [3. Proof of the Variational Theorem](#3-proof-of-the-variational-theorem)
+* [4. Derivation of the Linear Variational Method (The Secular Equation)](4-derivation-of-the-linear-variational-method-the-secular-equation)
+* [5. Analytical Solution of the Infinite Square Well](#5-analytical-solution-of-the-infinite-square-well)
+* [6. Analytical Solutions of the Quantum Harmonic Oscillator](#6-analytical-solutions-of-the-quantum-harmonic-oscillator)
+* [7. Accelerating the Engine: Analytical Matrix Elements](#7-accelerating-the-engine-analytical-matrix-elements)
 
 ---
 
@@ -30,7 +30,7 @@ Where $m$ is the mass, $\omega$ is the angular frequency, and $\hbar$ is the red
 
 To represent the continuous Hamiltonian operator $\hat{H}$ as a matrix, we must choose a complete set of orthonormal basis functions. We will use the analytical solutions of the 1D Infinite Square Well.
 
-Because our QHO potential is centered at $x=0$, we define our infinite well over a symmetric domain from $-L/2$ to $L/2$. The corresponding normalized basis functions for $n = 1, 2, 3, \dots$ are ([see derivation here](#5.-Analytical-Solution-of-the-Infinite-Square-Well)):
+Because our QHO potential is centered at $x=0$, we define our infinite well over a symmetric domain from $-L/2$ to $L/2$. The corresponding normalized basis functions for $n = 1, 2, 3, \dots$ are ([see derivation here](#5-analytical-solution-of-the-infinite-square-well):
 
 
 $$\chi_n(x) = \sqrt{\frac{2}{L}} \sin\left(\frac{n\pi(x + L/2)}{L}\right)$$
@@ -155,7 +155,7 @@ To avoid taking the derivative of a complex fraction using the quotient rule, we
 
 $$E \sum_{i,j} c_i^* c_j S_{ij} = \sum_{i,j} c_i^* c_j H_{ij}$$
 
-According to the Variational Principle, the optimal trial wavefunction is the one that minimizes the energy $E$. We find this minimum by requiring that the variation of the energy with respect to the coefficients is zero. In complex calculus, it is standard practice to treat $c_k$ and its complex conjugate $c_k^*$ as independent variables. Therefore, we take the partial derivative of both sides with respect to a specific coefficient $c_k^*$:
+According to the Variational Principle, the optimal trial wavefunction is the one that minimizes the energy $E$. We find this minimum by requiring that the variation of the energy with respect to the coefficients is zero. In complex calculus, it is standard practice to treat $c_k$ and its complex conjugate $c_k^{*}$ as independent variables. Therefore, we take the partial derivative of both sides with respect to a specific coefficient $c_k^{*}$:
 
 $$\frac{\partial E}{\partial c_k^*} \sum_{i,j} c_i^* c_j S_{ij} + E \sum_{j} c_j S_{kj} = \sum_{j} c_j H_{kj}$$
 
