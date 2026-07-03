@@ -29,7 +29,7 @@ Where $m$ is the mass, $\omega$ is the angular frequency, and $\hbar$ is the red
 
 To represent the continuous Hamiltonian operator $\hat{H}$ as a matrix, we must choose a complete set of orthonormal basis functions. We will use the analytical solutions of the 1D Infinite Square Well.
 
-Because our QHO potential is centered at $x=0$, we define our infinite well over a symmetric domain from $-L/2$ to $L/2$. The corresponding normalized basis functions for $n = 1, 2, 3, \dots$ are ([see derivation here](#5-analytical-solution-of-the-infinite-square-well):
+Because our QHO potential is centered at $x=0$, we define our infinite well over a symmetric domain from $-L/2$ to $L/2$. The corresponding normalized basis functions for $n = 1, 2, 3, \dots$ are ([see derivation here](#5-analytical-solution-of-the-infinite-square-well)):
 
 
 $$\chi_n(x) = \sqrt{\frac{2}{L}} \sin\left(\frac{n\pi(x + L/2)}{L}\right)$$
