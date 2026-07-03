@@ -8,8 +8,8 @@ OMEGA = 1.0 # Oscillator frequency
 # --- Baseline Defaults (For single-run testing) ---
 # We label them as defaults so we know they are meant to be overwritten in loops
 DEFAULT_L = 25.0      
-DEFAULT_N_BASIS = 50  
-DEFAULT_N_STATES = 20
+DEFAULT_N_BASIS = 100  
+DEFAULT_N_STATES = 38
 
 # --- Execution Flags ---
 # These control the logic flow, making debugging much easier.
