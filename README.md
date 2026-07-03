@@ -154,7 +154,7 @@ To avoid taking the derivative of a complex fraction using the quotient rule, we
 
 $$E \sum_{i,j} c_{i}^{\ast} c_{j} S_{ij} = \sum_{i,j} c_{i}^{\ast} c_{j} H_{ij}$$
 
-According to the Variational Principle, the optimal trial wavefunction is the one that minimizes the energy $E$. We find this minimum by requiring that the variation of the energy with respect to the coefficients is zero. In complex calculus, it is standard practice to treat $c_k$ and its complex conjugate $c_k^*$ as independent variables. Therefore, we take the partial derivative of both sides with respect to a specific coefficient $c_k^*$:
+According to the Variational Principle, the optimal trial wavefunction is the one that minimizes the energy $E$. We find this minimum by requiring that the variation of the energy with respect to the coefficients is zero. In complex calculus, it is standard practice to treat $c_k$ and its complex conjugate $c_{k}^{\ast}$ as independent variables. Therefore, we take the partial derivative of both sides with respect to a specific coefficient $c_{k}^{\ast}$:
 
 $$\frac{\partial E}{\partial c_{k}^{\ast}} \sum_{i,j} c_{i}^{\ast} c_{j} S_{ij} + E \sum_{j} c_{j} S_{kj} = \sum_{j} c_{j} H_{kj}$$
 
