@@ -15,7 +15,6 @@ In this notebook, We will solve using numeric (and symbolic) calculations the Qu
 
 ---
 
-<a id="sec1"></a>
 ## 1. The Hamiltonian
 
 The Quantum Harmonic Oscillator is defined by its kinetic and potential energy operators:
@@ -99,11 +98,11 @@ Where $c_n$ represents the complex expansion coefficients.
 
 First, we evaluate the numerator of the energy expectation value, $\langle \psi_{trial} | \hat{H} | \psi_{trial} \rangle$:
 
-$$\langle \psi_{trial} | \hat{H} | \psi_{trial} \rangle = \left( \sum_{m=0}^{\infty} c_m^* \langle \phi_m | \right) \hat{H} \left( \sum_{n=0}^{\infty} c_n | \phi_n \rangle \right)$$
+$$\langle \psi_{trial} | \hat{H} | \psi_{trial} \rangle = \left( \sum_{m=0}^{\infty} c_{m}^{*} \langle \phi_m | \right) \hat{H} \left( \sum_{n=0}^{\infty} c_n | \phi_n \rangle \right)$$
 
 Applying the Hamiltonian to the right-hand states ($\hat{H} | \phi_n \rangle = E_n | \phi_n \rangle$) yields:
 
-$$\langle \psi_{trial} | \hat{H} | \psi_{trial} \rangle = \sum_{m=0}^{\infty} \sum_{n=0}^{\infty} c_m^* c_n E_n \langle \phi_m | \phi_n \rangle$$
+$$\langle \psi_{trial} | \hat{H} | \psi_{trial} \rangle = \sum_{m=0}^{\infty} \sum_{n=0}^{\infty} c_{m}^{*} c_n E_n \langle \phi_m | \phi_n \rangle$$
 
 Because the exact eigenstates are mutually orthonormal ($\langle \phi_m | \phi_n \rangle = \delta_{mn}$), all terms where $m \neq n$ are zero, and the double sum collapses into a single sum:
 
@@ -141,7 +140,7 @@ $$|\psi_{trial}\rangle = \sum_{j=1}^{N_{basis}} c_j |\chi_j\rangle$$
 
 Where $c_j$ are the unknown expansion coefficients. We substitute this expansion into the variational energy expectation value:
 
-$$E = \frac{\langle \psi_{trial} | \hat{H} | \psi_{trial} \rangle}{\langle \psi_{trial} | \psi_{trial} \rangle} = \frac{\sum_{i=1}^{N} \sum_{j=1}^{N} c_i^* c_j \langle \chi_i | \hat{H} | \chi_j \rangle}{\sum_{i=1}^{N} \sum_{j=1}^{N} c_i^* c_j \langle \chi_i | \chi_j \rangle}$$
+$$E = \frac{\langle \psi_{trial} | \hat{H} | \psi_{trial} \rangle}{\langle \psi_{trial} | \psi_{trial} \rangle} = \frac{\sum_{i=1}^{N} \sum_{j=1}^{N} c_{i}^{*} c_j \langle \chi_i | \hat{H} | \chi_j \rangle}{\sum_{i=1}^{N} \sum_{j=1}^{N} c_{i}^{*} c_j \langle \chi_i | \chi_j \rangle}$$
 
 To simplify the notation, we define two matrix elements:
 * **The Hamiltonian Matrix:** $H_{ij} = \langle \chi_i | \hat{H} | \chi_j \rangle$
@@ -149,17 +148,17 @@ To simplify the notation, we define two matrix elements:
 
 Substituting these into the energy equation yields:
 
-$$E = \frac{\sum_{i,j} c_i^* c_j H_{ij}}{\sum_{i,j} c_i^* c_j S_{ij}}$$
+$$E = \frac{\sum_{i,j} c_{i}^{*} c_j H_{ij}}{\sum_{i,j} c_{i}^{*} c_j S_{ij}}$$
 
 To avoid taking the derivative of a complex fraction using the quotient rule, we rearrange the equation by multiplying the denominator to the left side:
 
-$$E \sum_{i,j} c_i^* c_j S_{ij} = \sum_{i,j} c_i^* c_j H_{ij}$$
+$$E \sum_{i,j} c_{i}^{*} c_j S_{ij} = \sum_{i,j} c_{i}^{*} c_j H_{ij}$$
 
-According to the Variational Principle, the optimal trial wavefunction is the one that minimizes the energy $E$. We find this minimum by requiring that the variation of the energy with respect to the coefficients is zero. In complex calculus, it is standard practice to treat $c_k$ and its complex conjugate $c_k^{*}$ as independent variables. Therefore, we take the partial derivative of both sides with respect to a specific coefficient $c_k^{*}$:
+According to the Variational Principle, the optimal trial wavefunction is the one that minimizes the energy $E$. We find this minimum by requiring that the variation of the energy with respect to the coefficients is zero. In complex calculus, it is standard practice to treat $c_k$ and its complex conjugate $c_{k}^{*}$ as independent variables. Therefore, we take the partial derivative of both sides with respect to a specific coefficient $c_{k}^{*}$:
 
-$$\frac{\partial E}{\partial c_k^*} \sum_{i,j} c_i^* c_j S_{ij} + E \sum_{j} c_j S_{kj} = \sum_{j} c_j H_{kj}$$
+$$\frac{\partial E}{\partial c_{k}^{*}} \sum_{i,j} c_{i}^{*} c_j S_{ij} + E \sum_{j} c_j S_{kj} = \sum_{j} c_j H_{kj}$$
 
-To find the minimum energy, we enforce the minimization condition: $\frac{\partial E}{\partial c_k^*} = 0$. The first term vanishes entirely, leaving:
+To find the minimum energy, we enforce the minimization condition: $\frac{\partial E}{\partial c_{k}^{*}} = 0$. The first term vanishes entirely, leaving:
 
 $$E \sum_{j} c_j S_{kj} = \sum_{j} c_j H_{kj}$$
 
@@ -318,6 +317,8 @@ $$\psi_n = \frac{1}{\sqrt{n!}}(\hat{a}^\dagger)^n \psi_0$$
 > **Computational Note:** In our code, we use natural units ($\hbar = m = \omega = 1$). This simplifies the exact normalized wavefunctions to:
 > $$\psi_n(x) = \frac{1}{\sqrt{2^n n! \sqrt{\pi}}} \exp\left(-\frac{x^2}{2}\right) H_n(x)$$
 
+---
+
 ## 7. Accelerating the Engine: Analytical Matrix Elements
 
 Calculating the Hamiltonian matrix is the primary computational bottleneck of the Variational Method. For a basis size of $N_{basis} = 50$, the symmetric matrix requires evaluating exactly 1,275 unique potential energy integrals. 
@@ -342,4 +343,3 @@ This shifts the integration bounds to $[0, L]$ and changes the $x^2$ term to $(u
 $$V_{nk} = \frac{m\omega^2}{L} \int_{0}^{L} \left(u - \frac{L}{2}\right)^2 \sin\left(\frac{n\pi u}{L}\right) \sin\left(\frac{k\pi u}{L}\right) du$$
 
 This integral consists entirely of polynomials multiplied by trigonometric functions, which means it has an exact analytical solution via recursive integration by parts. Instead of solving it by hand, we use SymPy to evaluate this integral symbolically. We then compile the result into a lightning-fast Python function that is triggered whenever `cfg.integration_method = 'analytical'` is selected, leaving the robust numerical solvers safely intact as another option.
-
