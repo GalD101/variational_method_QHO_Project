@@ -11,12 +11,6 @@ DEFAULT_L = 25.0
 DEFAULT_N_BASIS = 100  
 DEFAULT_N_STATES = 38
 
-# --- Execution Flags ---
-# These control the logic flow, making debugging much easier.
-DEBUG_PRINT = True       # Set to True to print matrix values (keep N_BASIS small if True!)
-PLOT_ERROR = True        # Flag to trigger the matplotlib convergence graph
-PLOT_WAVEFUNCTION = True # Flag to trigger visualizing the final wavefunctions
-
 # --- Numerical Methods ---
 integration_method = 'analytical' # Options: 'analytical', 'scipy', 'trapezoidal', 'romberg', 'simpsons'
 eigenvalue_method = 'scipy'       # Options: 'scipy', 'QR', 'Jacobi'
