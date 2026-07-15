@@ -114,13 +114,13 @@ def reconstruct_numerical_wavefunction(x_array, L, N_basis, eigenvector):
         psi_num += eigenvector[i] * basis_function(x_array, n, L)
     return psi_num
 
-def calculate_qho_energies_and_states(L_val, N_BASIS_val, N_STATES_val):
+def calculate_qho_energies_and_states(L_val, N_BASIS_val, N_STATES_val,  mass=cfg.MASS, omega=cfg.OMEGA):
     """Master pipeline: Builds the matrix and solves it for given parameters."""
     H_matrix = build_hamiltonian_matrix(
         N_BASIS=N_BASIS_val, 
         L=L_val, 
-        mass=cfg.MASS, 
-        omega=cfg.OMEGA, 
+        mass=mass, 
+        omega=omega, 
         integration_method=cfg.integration_method, 
         N_GRID=cfg.N_GRID
     )
